@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Compute Veil Logo</title>
+  <desc id="desc">Stylized shield with layered circuits representing encrypted compute.</desc>
+  <defs>
+    <linearGradient id="cv-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="#0f172a"/>
+  <path
+    d="M32 12L20 16v14c0 8.8 5.3 16.8 12 20 6.7-3.2 12-11.2 12-20V16L32 12z"
+    fill="url(#cv-gradient)"
+  />
+  <path
+    d="M24 26h16M24 32h10M24 38h6"
+    stroke="#e5f3ff"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+</svg>
+
