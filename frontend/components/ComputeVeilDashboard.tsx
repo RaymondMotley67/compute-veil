@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FHECounterPanel } from "@/components/FHECounterPanel";
 import { DatasetGrid, type DatasetCard } from "@/components/DatasetGrid";
 import { OperationLogPanel } from "@/components/OperationLogPanel";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { useFHEWorkflow } from "@/hooks/useFHEWorkflow";
 import { useOperationLog } from "@/hooks/useOperationLog";
 
@@ -208,8 +209,9 @@ export const ComputeVeilDashboard = () => {
   );
 
   return (
-    <div className="w-full space-y-10">
-      <section className="relative overflow-hidden bg-base-200/70">
+    <ErrorBoundary>
+      <div className="w-full space-y-10">
+        <section className="relative overflow-hidden bg-base-200/70">
         <div className="absolute inset-0 bg-gradient-to-br from-base-200 via-base-100 to-base-200" />
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.2) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
@@ -327,6 +329,7 @@ export const ComputeVeilDashboard = () => {
         </div>
       </section>
     </div>
+    </ErrorBoundary>
   );
 };
 
