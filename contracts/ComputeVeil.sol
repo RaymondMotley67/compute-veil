@@ -113,6 +113,7 @@ contract ComputeVeil is SepoliaConfig {
         euint32 encryptedEuint32 = FHE.fromExternal(inputEuint32, inputProof);
         _count = FHE.sub(_count, encryptedEuint32);
         FHE.allowThis(_count);
+        FHE.allow(_count, msg.sender);
         emit Decremented(msg.sender);
     }
 
