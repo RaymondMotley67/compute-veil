@@ -178,7 +178,12 @@ export const ComputeVeilDashboard = () => {
       return;
     }
     addLog({ kind: "info", title: "Refreshing encrypted handle" });
-    await workflow.fheCounter.refreshCountHandle();
+    try {
+      await workflow.fheCounter.refreshCountHandle();
+      addLog({ kind: "success", title: "Handle refreshed successfully" });
+    } catch (error) {
+      addLog({ kind: "error", title: "Failed to refresh handle", details: error instanceof Error ? error.message : "Unknown error" });
+    }
   };
 
   const handleDecryptHandle = () => {
