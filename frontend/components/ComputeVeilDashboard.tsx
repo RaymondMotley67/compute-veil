@@ -287,14 +287,14 @@ export const ComputeVeilDashboard = () => {
               <div className="flex flex-wrap gap-3">
                 <button
                   className="btn btn-sm"
-                  disabled={!workflow.fheCounter.canGetCount}
+                  disabled={!workflow.fheCounter.canGetCount || workflow.fheCounter.isRefreshing}
                   onClick={handleRefreshHandle}
                 >
                   {workflow.fheCounter.isRefreshing ? "Refreshing handle..." : "Refresh handle"}
                 </button>
                 <button
                   className="btn btn-sm btn-primary"
-                  disabled={!workflow.fheCounter.canDecrypt}
+                  disabled={!workflow.fheCounter.canDecrypt || workflow.fheCounter.isDecrypting}
                   onClick={handleDecryptHandle}
                 >
                   {workflow.fheCounter.isDecrypting ? "Decrypting..." : "Decrypt locally"}
