@@ -186,13 +186,18 @@ export const ComputeVeilDashboard = () => {
     }
   };
 
-  const handleDecryptHandle = () => {
+  const handleDecryptHandle = async () => {
     if (!workflow.fheCounter.canDecrypt) {
       addLog({ kind: "info", title: "Nothing to decrypt" });
       return;
     }
     addLog({ kind: "decrypt", title: "Decrypting latest handle" });
-    workflow.fheCounter.decryptCountHandle();
+    try {
+      await workflow.fheCounter.decryptCountHandle();
+      addLog({ kind: "success", title: "Decryption completed successfully" });
+    } catch (error) {
+      addLog({ kind: "error", title: "Decryption failed", details: error instanceof Error ? error.message : "Unknown error" });
+    }
   };
 
   const heroStats = useMemo(
