@@ -98,6 +98,7 @@ contract ComputeVeil is SepoliaConfig {
     /// @param inputEuint32 The encrypted input value
     /// @param inputProof The proof of correct encryption
     function increment(externalEuint32 inputEuint32, bytes calldata inputProof) external whenNotPaused {
+        require(inputProof.length > 0, "Invalid proof provided");
         euint32 encryptedEuint32 = FHE.fromExternal(inputEuint32, inputProof);
         _count = FHE.add(_count, encryptedEuint32);
         FHE.allowThis(_count);
@@ -110,6 +111,7 @@ contract ComputeVeil is SepoliaConfig {
     /// @param inputEuint32 The encrypted input value
     /// @param inputProof The proof of correct encryption
     function decrement(externalEuint32 inputEuint32, bytes calldata inputProof) external whenNotPaused {
+        require(inputProof.length > 0, "Invalid proof provided");
         euint32 encryptedEuint32 = FHE.fromExternal(inputEuint32, inputProof);
         _count = FHE.sub(_count, encryptedEuint32);
         FHE.allowThis(_count);
