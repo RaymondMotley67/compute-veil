@@ -53,7 +53,7 @@ deployment-info.json
 *.key
 private-keys/
 secrets/
-refer/*
+refer/
 *:Zone.Identifier
 package-lock.json
 frontend/package-lock.json
