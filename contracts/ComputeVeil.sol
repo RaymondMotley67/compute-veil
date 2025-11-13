@@ -135,6 +135,8 @@ contract ComputeVeil is SepoliaConfig {
     /// @dev Only the current owner can call this function
     /// @param newOwner The address of the new owner
     function transferOwnership(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "New owner cannot be zero address");
+        require(newOwner != _owner, "New owner must be different from current owner");
         emit OwnershipTransferred(_owner, newOwner);
         _owner = newOwner;
     }
