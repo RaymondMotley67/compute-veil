@@ -98,6 +98,17 @@ export const ComputeVeilDashboard = () => {
     successRate: 100
   });
   
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRealTimeStatus(prev => ({
+        ...prev,
+        lastUpdate: new Date()
+      }));
+    }, 30000); // Update every 30 seconds
+    
+    return () => clearInterval(interval);
+  }, []);
+  
   const [chartData, setChartData] = useState<{
     labels: string[];
     values: number[];
