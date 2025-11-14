@@ -101,4 +101,52 @@ describe("FHECounter", function () {
 
     expect(clearCountAfterInc).to.eq(0);
   });
+
+  it("should prevent increment when contract is paused", async function () {
+    // Pause the contract
+    await fheCounterContract.connect(signers.deployer).setPaused(true);
+    
+    const clearOne = 1;
+    const encryptedOne = await fhevm
+      .createEncryptedInput(fheCounterContractAddress, signers.alice.address)
+      .add32(clearOne)
+      .encrypt();
+
+    // Should fail when paused
+    await expect(fheCounterContract
+      .connect(signers.alice)
+      .increment(encryptedOne.handles[0], encryptedOne.inputProof))
+      .to.be.revertedWith("ContractPaused");
+  });
+
+  it("should prevent decrement when contract is paused", async function () {
+    // Pause the contract
+    await fheCounterContract.connect(signers.deployer).setPaused(true);
+    
+    const clearOne = 1;
+    const encryptedOne = await fhevm
+      .createEncryptedInput(fheCounterContractAddress, signers.alice.address)
+      .add32(clearOne)
+      .encrypt();
+
+    // Should fail when paused
+    await expect(fheCounterContract
+      .connect(signers.alice)
+      .decrement(encryptedOne.handles[0], encryptedOne.inputProof))
+      .to.be.revertedWith("ContractPaused");
+  });
+
+  it("should return correct protocol ID", async function () {
+    expect(await fheCounterContract.protocolId()).to.eq(1);
+  });
+
+  it("should allow owner to transfer ownership", async function () {
+    await fheCounterContract.connect(signers.deployer).transferOwnership(signers.bob.address);
+    expect(await fheCounterContract.owner()).to.eq(signers.bob.address);
+  });
+
+  it("should prevent non-owner from transferring ownership", async function () {
+    await expect(fheCounterContract.connect(signers.alice).transferOwnership(signers.bob.address))
+      .to.be.revertedWith("NotOwner");
+  });
 });
