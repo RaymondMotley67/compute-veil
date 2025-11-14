@@ -197,6 +197,31 @@ export const ComputeVeilDashboard = () => {
     }
   };
 
+  const handleExportData = () => {
+    const exportContent = {
+      operationHistory,
+      realTimeStatus,
+      chartData,
+      timestamp: new Date().toISOString(),
+      format: exportData.format
+    };
+
+    const blob = new Blob([JSON.stringify(exportContent, null, 2)], {
+      type: exportData.format === 'csv' ? 'text/csv' : 'application/json'
+    });
+    
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `compute-veil-export.${exportData.format}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    addLog({ kind: "success", title: "Data exported successfully" });
+  };
+
   const handleDecryptHandle = async () => {
     if (!workflow.fheCounter.canDecrypt) {
       addLog({ kind: "info", title: "Nothing to decrypt" });
