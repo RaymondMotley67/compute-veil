@@ -229,6 +229,11 @@ export const ComputeVeilDashboard = () => {
     [workflow.chainId, workflow.fheCounter.contractAddress, workflow.isConnected]
   );
 
+  const filteredDatasets = useMemo(() => {
+    if (!selectedCategory) return DATASET_PRESETS;
+    return DATASET_PRESETS.filter(dataset => dataset.category === selectedCategory);
+  }, [selectedCategory]);
+
   return (
     <ErrorBoundary>
       <div className="w-full space-y-10">
