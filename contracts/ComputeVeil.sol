@@ -62,6 +62,18 @@ contract ComputeVeil is SepoliaConfig {
         _owner = msg.sender;
     }
 
+    /// @notice Returns the contract owner address
+    /// @return The owner address
+    function owner() external view returns (address) {
+        return _owner;
+    }
+
+    /// @notice Returns whether the contract is paused
+    /// @return True if paused, false otherwise
+    function isPaused() external view returns (bool) {
+        return _paused;
+    }
+
     /// @notice Returns the current encrypted count handle
     /// @return The current encrypted count as euint32
     function getCount() external view returns (euint32) {
@@ -79,18 +91,6 @@ contract ComputeVeil is SepoliaConfig {
     /// @return The protocol ID (always 1)
     function protocolId() external pure returns (uint256) {
         return 1;
-    }
-
-    /// @notice Returns the contract owner address
-    /// @return The owner address
-    function owner() external view returns (address) {
-        return _owner;
-    }
-
-    /// @notice Returns whether the contract is paused
-    /// @return True if paused, false otherwise
-    function isPaused() external view returns (bool) {
-        return _paused;
     }
 
     /// @notice Increments the counter by an encrypted value
