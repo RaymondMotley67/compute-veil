@@ -15,7 +15,7 @@ The frontend orchestrates wallet connection, FHEVM encryption/decryption, and co
 
 ## Live Demo & Video
 
-- **Live demo**: https://compute-veil.vercel.app/
+- **Live demo**: https://compute-veil-ssru.vercel.app/
 - **Local demo video**: `video.mp4` (located at the project root)
 
 You can open the deployed demo directly in your browser, or play `video.mp4` locally to see the full interaction flow without setting up the environment.
